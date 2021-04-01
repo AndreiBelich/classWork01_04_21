@@ -1,23 +1,32 @@
 "use strict";
 
-function Student(firstName, lastName, age, isMale){
-  this.firstName = firstName;
-  this.lastName = lastName;
-  this.age = age;
-  this.isMale = isMale;
+function Ladder(){
+  this.value = 0;
 }
 
-function StudentPrototype(){
-  this.toString = function(){
-    return `${this.firstName} ${this.lastName}. I'm ${this.age} years old.`;
+function LadderPrototype(){
+  this.up = function(){
+    this.value++;
+    return this;
   }
 
-  this.say = function(message){
-    return `Студент ${this.firstName} говорит:\n${message}`;
+  this.down = function(){
+    if(this.value > 0){
+      this.value--;
+    }
+    return this;
+  }
+
+  this.showStep = function(){
+    return this.value;
   }
 }
 
-Student.prototype = new StudentPrototype();
+Ladder.prototype = new LadderPrototype();
 
-const student = new Student("Alex", "Adams", 27, true);
-console.log(student.say("Hello world<3"));
+const ladder = new Ladder();
+ladder.up()
+      .up()
+      .up()
+      .down()
+      .showStep();
